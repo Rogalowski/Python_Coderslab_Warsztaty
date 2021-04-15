@@ -19,13 +19,11 @@ def lotto_def(i = 0):
 
 def shooting_def(i = 0):
 
-
-    print("Podaj 6 liczb ktore sie nie powtorza:")
     while len(choosen) != 6:  # losuje tak dlugo az lista wybranych liczb nie bedzie dluga do 6
         try:
             i = i + 1
 
-            print("Podaj", i, "liczbe od 1 do 49:", end=" ")
+            print("Podaj", i, "liczbe:", end=" ")
             number = int(input())
 
             if number in choosen:
@@ -58,7 +56,7 @@ def main_lotto_def():
         print("Przykro mi,to za malo. Liczba ogolna trafionych:", i)
 
 
-print("GAME LOTTO")
+print("GAME LOTTO, Please Choose 6 numbers from 1 - 49")
 print("Podane liczby przez gracza to:", shooting_def())
 print("Wylosowane liczby to:", lotto_def())
 print(main_lotto_def())
