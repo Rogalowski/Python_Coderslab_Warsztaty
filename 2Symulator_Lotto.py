@@ -1,8 +1,9 @@
 from random import randint
 
-lotto = []
-wybrane = []
+lotto = [] #numbers randomized in lotto
+choosen = [] #numbers choosen by player
 
+#i,j - counters
 
 def lotto_def(i = 0):
 
@@ -20,21 +21,25 @@ def shooting_def(i = 0):
 
 
     print("Podaj 6 liczb ktore sie nie powtorza:")
-    while len(wybrane) != 6:  # losuje tak dlugo az lista wybranych liczb nie bedzie dluga do 6
-        i = i + 1
+    while len(choosen) != 6:  # losuje tak dlugo az lista wybranych liczb nie bedzie dluga do 6
+        try:
+            i = i + 1
 
-        print("Podaj", i, "liczbe od 1 do 49:", end=" ")
-        liczba = int(input())
+            print("Podaj", i, "liczbe od 1 do 49:", end=" ")
+            number = int(input())
 
-        if liczba in wybrane:
-            print("Ta liczba już istnieje, podaj inną!")
+            if number in choosen:
+                print("Ta liczba już istnieje, podaj inną!")
+                i = i - 1
+            elif number < 1 or number > 49:
+                print("Ta liczba z poza zakresu, podaj inną!")
+                i = i - 1
+            else:
+                choosen.append(number)
+        except ValueError:
+            print("Please provide int number")
             i = i - 1
-        elif liczba < 1 or liczba > 49:
-            print("Ta liczba z poza zakresu, podaj inną!")
-            i = i - 1
-        else:
-            wybrane.append(liczba)
-    return sorted(wybrane)
+    return sorted(choosen)
 
 def main_lotto_def():
     i = 0
@@ -43,14 +48,14 @@ def main_lotto_def():
 
 
 
-        if wybrane[j] in lotto:
+        if choosen[j] in lotto:
             j += 1
-            print("Trafione lotki", j)
+            print("Trafiona lotka to:", j)
             i += 1
     if i >= 3 and i <= 6:
         print("BRAWO, trafiles:", i, "liczb")
     else:
-        print("Przykro mi,to za malo. Liczba trafionych:", i)
+        print("Przykro mi,to za malo. Liczba ogolna trafionych:", i)
 
 
 print("GAME LOTTO")
