@@ -4,57 +4,87 @@ print("Imagine number between 0 and 1000!")
 
 
 
-def guess_def(mini = 0, maxi = 1000, j = 1, flag = True):
+
+def guess_def(mini = 0, maxi = 1000,j = 1):
+
+
     guess = int((maxi-mini)/2)+mini
     print("\n")
-    print(j, "chance ---> Guess: " + str(guess))
 
 
 
 
-    answer = input("Available answers: \n - Correct \n - Too big \n - To small\nType here: ")
-    if answer == "Correct" or "Too big" or "Too small":
+#Proba dodania mozliwosci poprawy komendy przy jej blednym wprowadzeniu. W innym przypadku konyczl program
+    while j <= 10:
 
-        if answer == "Correct" and j < 10:
-            print("You WIN!!!")
-        elif answer == "Too big" and j < 10:
-            print("Too much?")
-            guess_def(mini, guess, j + 1)
-        elif answer == "Too small" and j < 10:
-            print("Too less?")
-            guess_def(guess, maxi, j + 1)
-        else:
-            print("Do not cheat! Try again!!!\n")
+        print(j, "chance ---> Guess: " + str(guess))
+
+        answer = input("Available answers: \n - Correct \n - Too big \n - To small\nType here: ")
+
+        if j < 10 and answer == "Correct" or "Too big" or "Too small":
+            print(j+1)
+
+            if answer == "Correct" and j < 10:
+                print("You WIN!!!")
+                break
+            elif answer == "Too big" and j < 10:
+                j += 1
+                print("Too much?")
+                guess_def(mini, guess, j)
+            elif answer == "Too small" and j < 10:
+                j += 1
+                print("Too less?")
+                guess_def(guess, maxi, j)
+            elif j == 9:
+                print("Koniec Szans\n")
+                j += 1
+
+            else:
+                if j == 10:
+                    print("DO NOT CHEAT!!!\n")
+                    break
+    else:
+        print("KONIEC")
 
 
-    # while j < 10 or flag == True:
-    #
-    #     answer = input("Available answers: \n - Correct \n - Too big \n - To small\nType here: ")
-    #     if answer == "Correct" or "Too big" or "Too small":
-    #
-    #         if answer == "Correct" and j < 10:
-    #             print("You WIN!!!")
-    #             break
-    #         elif answer == "Too big" and j < 10:
-    #             print("Too much?")
-    #             guess_def(mini, guess, j + 1)
-    #         elif answer == "Too small" and j < 10:
-    #             print("Too less?")
-    #             guess_def(guess, maxi, j + 1)
-    #         elif j == 10:
-    #             print("Do not cheat!!!")
-    #             break
-    #         else:
-    #             print("Try again!!!\n")
-    #     break
+
+
 
 
 
 if __name__ == '__main__':
-    guess_def(0, 1000 , 1, True)
+    guess_def(0, 1000, )
+
+
+###################MY SIMPLER:
+# def guess_def(mini = 0, maxi = 1000, j = 1, flag = True):
+#     guess = int((maxi-mini)/2)+mini
+#     print("\n")
+#     print(j, "chance ---> Guess: " + str(guess))
+#
+#
+#
+#
+#     answer = input("Available answers: \n - Correct \n - Too big \n - To small\nType here: ")
+#     if answer == "Correct" or "Too big" or "Too small":
+#
+#         if answer == "Correct" and j < 10:
+#             print("You WIN!!!")
+#         elif answer == "Too big" and j < 10:
+#             print("Too much?")
+#             guess_def(mini, guess, j + 1)
+#         elif answer == "Too small" and j < 10:
+#             print("Too less?")
+#             guess_def(guess, maxi, j + 1)
+#         else:
+#             print("Do not cheat! Try again!!!\n")
 
 
 
+
+
+
+##########################ODP Z LMS CODERSLAB:
 #def user_input():
     # """Return proper value provided by user.
     # :rtype: str
