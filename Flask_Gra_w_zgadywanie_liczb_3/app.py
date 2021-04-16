@@ -17,6 +17,7 @@ html_start = """
             <form  action = "" method = "POST">
             Mini: <input type="text" name="min" value="{}"><br>
             Maxi: <input type="hidden" name = "max" value="{}"> <br>
+            Counter: <input type="text" name = "counter" value="{}"> <br>
             <input type="submit" value="OK">
             </form >
             
@@ -70,7 +71,7 @@ html_win = """<!DOCTYPE html>
 
 def index():
     if request.method == "GET":
-        return html_start.format(0, 1000)  # DLACZEGO?????????
+        return html_start.format(0, 1000, 1)  # STAN POCZATKOWY
 
     if request.method == "POST":
 
@@ -92,7 +93,7 @@ def index():
             counter += 1
         elif answer == "Correct":
             return html_win.format(guess=guess, counter=counter)
- 
+
 
         guess = (maxi - mini) // 2 + mini
         return HTML_GAME.format(guess=guess, min=mini, max=maxi, counter=counter)
