@@ -1,45 +1,102 @@
 from flask import Flask, request
-import random
 
 app = Flask(__name__)
 
+html_start = """
+    <!DOCTYPE html>
+    <html lang="en"> 
 
-@app.route('/', methods=["GET", "POST"])
-def zgadywanka():
-    if request.method == 'GET':
-        return ''' 
-    <html> 
+    <head>
+    <meta charset="UTF-8">
+    <title>Guess The Number</title>
+    </head>
+
         <body>
-            <form method = "POST">
-            <input type="maxi"  name = "maxi" >
-            <input type="mini"  name = "mini" >
-            <input type="guess"  name = "guess" >
+        <h3>Lets Start The Game</h3>
+        
+            <form  action = "" method = "POST">
+            Mini: <input type="text" name="min" value="{}"><br>
+            Maxi: <input type="hidden" name = "max" value="{}"> <br>
+            <input type="submit" value="OK">
+            </form >
             
-            <input type = "submit">
+        </body>
+    </html>
+    """
+
+HTML_GAME = """
+    <!DOCTYPE html>
+    <html lang="en"> 
+
+    <head>
+    <meta charset="UTF-8">
+    <title>Guess The Number</title>
+    </head>
+
+        <body>
+            <p> Here: {guess} </p>
+            <h3>GAME to guess Imagine number 1 - 1000 </h3>
+            <p> Turn number: {counter}</p>
+            <form  action = "" method = "POST">
+            Mini: <input type="text"  name = "min" value="{min}"> <br>
+            Maxi: <input type="text"  name = "max" value="{max}"> <br>
+            Guess:<input type="text" name = "guess" value="{guess}"> <br>
+            Counter: <input type="text" name = "counter" value="{counter}"> <br>
+
+            <br>
+
+            <input type="submit" name="answer" value="Too Big">
+            <input type="submit" name="answer" value="Too Small">
+            <input type="submit" name="answer" value="Correct">
             </form >
         </body>
     </html>
-    '''
+    """
+html_win = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guess The Number</title>
+  
+</head>
+<body>
+<h1>Hurra! I guess! Your number is {guess} in {counter} turns!</h1>
+
+</body>
+</html>
+"""
+
+@app.route("/", methods=["GET", "POST"])
+
+def index():
+    if request.method == "GET":
+        return html_start.format(0, 1000)  # DLACZEGO?????????
+
+    if request.method == "POST":
+
+        mini = int(request.form.get("min"))
+        maxi = int(request.form.get("max"))
+        guess = int(request.form.get("guess", 500))
+
+        counter = int(request.form.get("counter", 1))
+        answer = request.form.get("answer")
 
 
-    #if request.method == 'POST':
-    else:
-        liczba_wprowadzona = int(request.form["liczba_wprowadzona"])
-        if liczba_wprowadzona == liczba_losowa:
-            return f"TRAFILES Wylosowana liczba: {liczba_losowa} Wprowadzona: {liczba_wprowadzona}"
-        elif liczba_wprowadzona < liczba_losowa:
-            return f"NIETRAFILES ZA MALO, Wylosowana liczba: {liczba_losowa} Wprowadzona: {liczba_wprowadzona}"
-        elif liczba_wprowadzona > liczba_losowa:
-            return f"NIETRAFILES ZA DUZO, Wylosowana liczba: {liczba_losowa} Wprowadzona: {liczba_wprowadzona}"
-        #liczba1 = int(liczba1)
 
+        if answer == "Too Big":
+            maxi = guess
+            counter += 1
 
-    # else:
-    #     return f"To nie ta liczba {liczba_wprowadzona}"
+        elif answer == "Too Small":
+            mini = guess
+            counter += 1
+        elif answer == "Correct":
+            return html_win.format(guess=guess, counter=counter)
+ 
 
-
-
+        guess = (maxi - mini) // 2 + mini
+        return HTML_GAME.format(guess=guess, min=mini, max=maxi, counter=counter)
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5002)
+    app.run()
