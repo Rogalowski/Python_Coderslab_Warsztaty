@@ -47,3 +47,21 @@ if __name__ == '__main__':
     print(roll_the_dice("DD34"))
     print(roll_the_dice("4-3D6"))
 
+#######################################BARTEK ZACZYNSKI SOLUTION
+import re
+from random import randint
+def throw(expression):
+    if match := re.match(r"(\d*)D(\d+)([+-]\d+)?", expression):
+        num_throws, dice, offset = match.groups()
+        if num_throws == "":
+            num_throws = 1
+        else:
+            num_throws = int(num_throws)
+        dice = int(dice)
+        offset = 0 if offset is None else int(offset)
+        return offset + sum(randint(1, dice) for _ in range(num_throws))
+    else:
+        raise ValueError("Nieprawidłowe wyrażenie")
+print(throw("2D51+10"))
+print(throw("D51+10"))
+print(throw("D51"))

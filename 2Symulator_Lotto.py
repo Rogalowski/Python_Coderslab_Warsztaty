@@ -23,14 +23,14 @@ def shooting_def(i = 0):
         try:
             i = i + 1
 
-            print("Podaj", i, "liczbe:", end=" ")
+            print("Provide", i, "number:", end=" ")
             number = int(input())
 
             if number in choosen:
-                print("Ta liczba już istnieje, podaj inną!")
+                print("This number exist, try with another!")
                 i = i - 1
             elif number < 1 or number > 49:
-                print("Ta liczba z poza zakresu, podaj inną!")
+                print("This number out of range, try with another!")
                 i = i - 1
             else:
                 choosen.append(number)
@@ -48,15 +48,15 @@ def main_lotto_def():
 
         if choosen[j] in lotto:
             j += 1
-            print("Trafiona lotka to:", j)
+            print("You hit:", j)
             i += 1
     if i >= 3 and i <= 6:
-        print("BRAWO, trafiles:", i, "liczb")
+        print("BRAVO, You hit in total:", i, "numbers")
     else:
-        print("Przykro mi,to za malo. Liczba ogolna trafionych:", i)
-
+        print("Unfourtenally its too less. You hit in total:", i)
+    return ""
 
 print("GAME LOTTO, Please Choose 6 numbers from 1 - 49")
-print("Podane liczby przez gracza to:", shooting_def())
-print("Wylosowane liczby to:", lotto_def())
+print("Numbers of user:", shooting_def())
+print("Numbers radomized by lotto:", lotto_def())
 print(main_lotto_def())

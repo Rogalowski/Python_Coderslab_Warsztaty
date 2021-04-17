@@ -1,20 +1,11 @@
-
-
 print("Imagine number between 0 and 1000!")
 
 
-
-
-def guess_def(mini = 0, maxi = 1000,j = 1):
-
-
-    guess = int((maxi-mini)/2)+mini
+def guess_def(mini=0, maxi=1000, j=1):
+    guess = int((maxi - mini) / 2) + mini
     print("\n")
 
-
-
-
-#Proba dodania mozliwosci poprawy komendy przy jej blednym wprowadzeniu. W innym przypadku konyczl program
+    # Proba dodania mozliwosci poprawy komendy przy jej blednym wprowadzeniu. W innym przypadku konyczl program
     while j <= 10:
 
         print(j, "chance ---> Guess: " + str(guess))
@@ -22,7 +13,7 @@ def guess_def(mini = 0, maxi = 1000,j = 1):
         answer = input("Available answers: \n - Correct \n - Too big \n - To small\nType here: ")
 
         if j < 10 and answer == "Correct" or "Too big" or "Too small":
-            print(j+1)
+            print(j + 1)
 
             if answer == "Correct" and j < 10:
                 print("You WIN!!!")
@@ -47,14 +38,8 @@ def guess_def(mini = 0, maxi = 1000,j = 1):
         print("KONIEC")
 
 
-
-
-
-
-
 if __name__ == '__main__':
     guess_def(0, 1000, )
-
 
 ###################MY SIMPLER:
 # def guess_def(mini = 0, maxi = 1000, j = 1, flag = True):
@@ -80,17 +65,13 @@ if __name__ == '__main__':
 #             print("Do not cheat! Try again!!!\n")
 
 
-
-
-
-
 ##########################ODP Z LMS CODERSLAB:
-#def user_input():
-    # """Return proper value provided by user.
-    # :rtype: str
-    # :return: value provided by user from ["to small", "to big", "you win"]
-    # """
-    #   possible_input = ["to small", "to big", "you win"]
+# def user_input():
+# """Return proper value provided by user.
+# :rtype: str
+# :return: value provided by user from ["to small", "to big", "you win"]
+# """
+#   possible_input = ["to small", "to big", "you win"]
 #     while True:
 #         user_answer = input().lower()
 #         if user_answer in possible_input:
